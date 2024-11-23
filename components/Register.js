@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../reducers/user";
 import { useRouter } from "next/router";
+import InputPassword from "./subComponents/InputPassword";
 
 export default function Register() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -33,6 +33,7 @@ export default function Register() {
     const resJson = await response.json();
     console.log("received response: ", response.status);
     if (response.status == 200) {
+      console.log("Got a sucessful 200 response ✅️");
       console.log(resJson);
       dispatch(loginUser(resJson));
       router.push("/status");
@@ -64,15 +65,7 @@ export default function Register() {
               />
             </div>
 
-            <div className={styles.divInput}>
-              <input
-                className={styles.inputEmail}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder="password"
-                type="password"
-              />
-            </div>
+            <InputPassword />
             <div className={styles.divBtnRegister}>
               <button
                 className={styles.btnRegister}

@@ -2,14 +2,12 @@ import styles from "../styles/Login.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../reducers/user";
-// import { useHistory } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
+import InputPassword from "./subComponents/InputPassword";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const [machineName, setMachineName] = useState("");
+
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
@@ -67,16 +65,7 @@ export default function Login() {
                 placeholder="email"
               />
             </div>
-
-            <div className={styles.divInput}>
-              <input
-                className={styles.inputEmail}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder="password"
-                type="password"
-              />
-            </div>
+            <InputPassword />
             <div className={styles.divBtnLogin}>
               <button
                 className={styles.btnLogin}

@@ -16,7 +16,6 @@
 }
 .divTitles {
   display: flex;
-  display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
@@ -43,6 +42,13 @@
   font-size: xx-large;
   padding: 1rem;
   margin-bottom: 2rem;
+}
+
+.iconEyePasswordObe {
+  position: absolute;
+  font-size: 1.5rem;
+  transform: translate(-3rem, 1.6rem);
+  cursor: "pointer";
 }
 
 .btnLogin {

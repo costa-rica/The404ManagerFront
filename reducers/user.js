@@ -23,6 +23,7 @@ export const userSlice = createSlice({
       state.value.username = action.payload.username;
       state.value.role = action.payload.role;
       state.value.email = action.payload.email;
+      console.log(`- finished loginUser 🏁`);
     },
     logoutUser: (state) => {
       console.log(`- dans Redux: logoutUser 🔔`);
@@ -30,6 +31,7 @@ export const userSlice = createSlice({
       state.value.username = null;
       state.value.role = null;
       state.value.email = null;
+      console.log(`- finished logoutUser 🏁`);
     },
   },
 });
