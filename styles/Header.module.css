@@ -1,0 +1,39 @@
+.divLine {
+  position: fixed;
+  top: var(--header-height);
+  height: 3px;
+  width: 90vw;
+  transform: translateX(5vw);
+  background-color: white;
+  border-radius: 2rem;
+}
+.divHeaderTopLeft {
+  /* display: flex; */
+  text-align: center;
+}
+.divHeaderRight {
+  position: absolute;
+  top: var(--header-height);
+  right: 0;
+  transform: translate(-5vw, -100%);
+  /* background-color: red; */
+}
+.divHeaderRightUl {
+  display: flex;
+  list-style-type: none;
+  /* background-color: purple; */
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.btnNav {
+  text-decoration: none;
+  background-color: var(--light-text-color);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 12px 12px 0 0;
+}
+.btnNavActive {
+  text-decoration: none;
+  background-color: var(--highlight-yellow);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 12px 12px 0 0;
+}

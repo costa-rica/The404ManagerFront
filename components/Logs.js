@@ -7,7 +7,7 @@ import { loginUser } from "../reducers/user";
 import { useRouter } from "next/router";
 import HeaderCustom from "./Header";
 
-export default function Status() {
+export default function Logs() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [machineName, setMachineName] = useState("");
@@ -39,7 +39,7 @@ export default function Status() {
     <main className={styles.mainStatus}>
       <HeaderCustom />
       <div className="restOfPage">
-        <h1 style={{ backgroundColor: "red" }}>Status Starts here</h1>
+        <h1 style={{ backgroundColor: "red" }}>Logs Starts here</h1>
         <div className={styles.divMainSub}>Status page: {stuffArray}</div>
       </div>
     </main>

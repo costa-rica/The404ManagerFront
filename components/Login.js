@@ -37,7 +37,15 @@ export default function Login() {
     console.log("received response");
     console.log(resJson);
     dispatch(loginUser(resJson));
-
+    if (response.status == 200) {
+      console.log(resJson);
+      dispatch(loginUser(resJson));
+      router.push("/status");
+    } else {
+      window.alert(
+        resJson?.message ? resJson.message : "There was a server error"
+      );
+    }
     console.log("🚨 after the fetch ");
   };
   const handleClickToReg = () => router.push("/register"); //eg.history.push('/login');

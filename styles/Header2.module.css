@@ -1,0 +1,49 @@
+/* CSS for the <Header/> */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #2d2d4d; /* Adjust to match the background color of your theme */
+}
+
+.navButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* .navButtons button { */
+.btnNav {
+  background-color: #ffa500; /* Adjust for button color */
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.navButtons button:hover {
+  background-color: #ff8c00; /* Adjust for hover effect */
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.titleContainer h1 {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+}
+
+.titleContainer h2 {
+  margin: 5px 0 0 0;
+  font-size: 18px;
+  color: lightgray;
+}

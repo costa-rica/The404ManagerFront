@@ -18,8 +18,28 @@ body {
   --highlight-red: #8b0419;
   --highlight-green: #4ad22b;
   --highlight-yellow: #fa9f15;
+  --header-height: 10rem;
 }
 
 h2 {
   color: var(--med-text-color);
+}
+
+/* styles/globals.css */
+.header-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* padding: 1rem; */
+  height: var(--header-height);
+}
+
+.restOfPage {
+  margin-top: var(--header-height);
+  padding: 1rem;
+  overflow-y: auto;
 }
