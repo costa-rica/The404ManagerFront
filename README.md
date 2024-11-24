@@ -22,3 +22,8 @@ NEXT_PUBLIC_API_BASE_URL=http://0.0.0.0:3000
       <div>
     )
 ```
+
+## Font
+
+1. install `npm i @next/font`
+2. pages/app.js `import {Roboto} from '@next/font/google'`
