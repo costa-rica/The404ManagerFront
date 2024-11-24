@@ -25,6 +25,43 @@ NEXT_PUBLIC_API_BASE_URL=http://0.0.0.0:3000
 
 ## Font
 
+Requires NextJs 13 or heigher
+
 1. next newsest `yarn add next@latest react@latest react-dom@latest`
-2. install `npm i @next/font`
-3. pages/app.js `import {Roboto} from '@next/font/google'`
+2. `npx @next/codemod@latest built-in-next-font .`
+3. install `npm i @next/font`
+4. pages/app.js
+
+```js
+import { JetBrains_Mono, Righteous } from "next/font/google";
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
+const righteous = Righteous({
+  subsets: ["latin"],
+  variable: "--font-righteous",
+  weight: ["400"],
+  display: "swap",
+});
+
+function App({ Component, pageProps }) {
+  return (
+    <div className={`${jetBrainsMono.variable} ${righteous.variable}`}>
+      <Provider store={store}>// Rest of code</Provider>
+    </div>
+  );
+}
+```
+
+5. to use in css, for example, globals.css:
+
+```css
+* {
+  box-sizing: border-box;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
+```
