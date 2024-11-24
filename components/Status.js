@@ -2,8 +2,6 @@ import styles from "../styles/Status.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../reducers/user";
-// import { useHistory } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import HeaderCustom from "./Header";
 
@@ -18,7 +16,14 @@ export default function Status() {
     (async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`, // Add token to Authorization header
+            },
+          }
         );
         const responseJson = await response.json();
         console.log(responseJson);
@@ -37,7 +42,13 @@ export default function Status() {
   appsList.map((elem, index) => {
     const stuff = (
       <tr>
-        <td>{elem.name}</td>
+        <td>
+          <span className={styles.spanAppName}>{elem.name}</span>
+          <br />
+          <span className={styles.spanAppProjectPath}>
+            {elem.appProjectPath}
+          </span>
+        </td>
         <td>{elem?.port}</td>
         <td>{elem.status}</td>
       </tr>
