@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { savePassword } from "../../reducers/user";
 
 export default function InputPassword() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
   const togglePasswordVisibility = () => {
     setPasswordVisible((prev) => !prev);
+  };
+  // const [userInput, setUserInput] = useState("");
+
+  const changeHandler = (e) => {
+    setPassword(e.target.value);
+    dispatch(savePassword(e.target.value));
   };
   return (
     <div>
@@ -17,7 +28,7 @@ export default function InputPassword() {
           padding: "1rem",
           marginBottom: "2rem",
         }}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={changeHandler}
         value={password}
         placeholder="password"
         type={passwordVisible ? "text" : "password"}

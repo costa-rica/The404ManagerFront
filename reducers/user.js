@@ -7,6 +7,7 @@ const initialState = {
     email: null,
     role: null,
     machineName: null,
+    password: null,
   },
 };
 
@@ -33,11 +34,12 @@ export const userSlice = createSlice({
       state.value.email = null;
       console.log(`- finished logoutUser 🏁`);
     },
-    setPassword: (state) => {
+    savePassword: (state, action) => {
       state.value.password = action.payload;
     },
   },
 });
 
-export const { setMachineNameRedux, loginUser, logoutUser } = userSlice.actions;
+export const { setMachineNameRedux, loginUser, logoutUser, savePassword } =
+  userSlice.actions;
 export default userSlice.reducer;
