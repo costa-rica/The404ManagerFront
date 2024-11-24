@@ -34,12 +34,8 @@ export const userSlice = createSlice({
       state.value.email = null;
       console.log(`- finished logoutUser 🏁`);
     },
-    savePassword: (state, action) => {
-      state.value.password = action.payload;
-    },
   },
 });
 
-export const { setMachineNameRedux, loginUser, logoutUser, savePassword } =
-  userSlice.actions;
+export const { setMachineNameRedux, loginUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;

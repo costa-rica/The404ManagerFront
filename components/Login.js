@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import InputPassword from "./subComponents/InputPassword";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-
+  const [email, emailSetter] = useState("");
+  const [password, passwordSetter] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
@@ -18,11 +18,14 @@ export default function Login() {
     );
 
     document.title = "Server Manager";
-  }, []); // The empty array ensures this runs only on mount
+  }, []);
+
+  const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
+    passwordSetter(passwordFromInputPasswordElement);
+  };
 
   const handleClickLogin = async () => {
     console.log("- handleClickReg 👀");
-    const password = user.password;
     const bodyObj = { email, password };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,
@@ -47,7 +50,9 @@ export default function Login() {
     }
     console.log("🚨 after the fetch ");
   };
+
   const handleClickToReg = () => router.push("/register"); //eg.history.push('/login');
+
   return (
     <div>
       <main className={styles.main}>
@@ -61,12 +66,14 @@ export default function Login() {
             <div>
               <input
                 className={styles.inputEmail}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => emailSetter(e.target.value)}
                 value={email}
                 placeholder="email"
               />
             </div>
-            <InputPassword />
+            <InputPassword
+              sendPasswordBackToParent={sendPasswordBackToParent}
+            />
             <div className={styles.divBtnLogin}>
               <button
                 className={styles.btnLogin}

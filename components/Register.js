@@ -6,22 +6,20 @@ import { useRouter } from "next/router";
 import InputPassword from "./subComponents/InputPassword";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
+  const [email, emailSetter] = useState("");
+  const [password, passwordSetter] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
-  useEffect(() => {
+  const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
     console.log(
-      `process.env.NEXT_PUBLIC_API_BASE_URL: ${process.env.NEXT_PUBLIC_API_BASE_URL}`
+      `- in sendPasswordBackToParent: ${passwordFromInputPasswordElement} ✅`
     );
-
-    document.title = "Server Manager";
-  }, []); // The empty array ensures this runs only on mount
+    passwordSetter(passwordFromInputPasswordElement);
+  };
 
   const handleClickReg = async () => {
-    console.log("- handleClickReg 👀");
-    const password = user.password;
     const bodyObj = { email, password };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/register`,
@@ -60,13 +58,15 @@ export default function Register() {
             <div>
               <input
                 className={styles.inputEmail}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => emailSetter(e.target.value)}
                 value={email}
                 placeholder="email"
               />
             </div>
 
-            <InputPassword />
+            <InputPassword
+              sendPasswordBackToParent={sendPasswordBackToParent}
+            />
             <div className={styles.divBtnRegister}>
               <button
                 className={styles.btnRegister}
