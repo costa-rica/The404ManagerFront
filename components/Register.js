@@ -21,6 +21,7 @@ export default function Register() {
 
   const handleClickReg = async () => {
     console.log("- handleClickReg 👀");
+    const password = user.password;
     const bodyObj = { email, password };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/register`,

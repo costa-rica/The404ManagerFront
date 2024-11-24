@@ -22,6 +22,7 @@ export default function Login() {
 
   const handleClickLogin = async () => {
     console.log("- handleClickReg 👀");
+    const password = user.password;
     const bodyObj = { email, password };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`,

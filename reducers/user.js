@@ -33,6 +33,9 @@ export const userSlice = createSlice({
       state.value.email = null;
       console.log(`- finished logoutUser 🏁`);
     },
+    setPassword: (state) => {
+      state.value.password = action.payload;
+    },
   },
 });
 
