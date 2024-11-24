@@ -7,6 +7,7 @@ import InputPassword from "./subComponents/InputPassword";
 
 export default function Register() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -18,6 +19,11 @@ export default function Register() {
 
     document.title = "Server Manager";
   }, []); // The empty array ensures this runs only on mount
+
+  const sendPasswordBackToParent = async (passwordFromInputPasswordElement) => {
+    await setPassword(passwordFromInputPasswordElement);
+    console.log(`- in sendPasswordBackToParent: ${password} ✅`);
+  };
 
   const handleClickReg = async () => {
     console.log("- handleClickReg 👀");
@@ -65,7 +71,9 @@ export default function Register() {
               />
             </div>
 
-            <InputPassword />
+            <InputPassword
+              sendPasswordBackToParent={sendPasswordBackToParent}
+            />
             <div className={styles.divBtnRegister}>
               <button
                 className={styles.btnRegister}

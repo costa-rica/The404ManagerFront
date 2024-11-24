@@ -13,3 +13,7 @@
 .divStatus {
   margin-top: var(--header-height);
 }
+.spanAppName {
+  color: var(--highlight-yellow);
+  font-size: xx-large;
+}

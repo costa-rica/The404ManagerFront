@@ -7,7 +7,7 @@ import InputPassword from "./subComponents/InputPassword";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
@@ -16,9 +16,15 @@ export default function Login() {
     console.log(
       `process.env.NEXT_PUBLIC_API_BASE_URL: ${process.env.NEXT_PUBLIC_API_BASE_URL}`
     );
-
     document.title = "Server Manager";
   }, []); // The empty array ensures this runs only on mount
+
+  const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
+    console.log(
+      `- in sendPasswordBackToParent: ${passwordFromInputPasswordElement} ✅`
+    );
+    setPassword(passwordFromInputPasswordElement);
+  };
 
   const handleClickLogin = async () => {
     console.log("- handleClickReg 👀");
@@ -65,7 +71,9 @@ export default function Login() {
                 placeholder="email"
               />
             </div>
-            <InputPassword />
+            <InputPassword
+              sendPasswordBackToParent={sendPasswordBackToParent}
+            />
             <div className={styles.divBtnLogin}>
               <button
                 className={styles.btnLogin}

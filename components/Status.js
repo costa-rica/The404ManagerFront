@@ -17,8 +17,16 @@ export default function Status() {
   useEffect(() => {
     (async () => {
       try {
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`, // Add token to Authorization header
+        };
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`,
+          {
+            method: "GET",
+            headers,
+          }
         );
         const responseJson = await response.json();
         console.log(responseJson);
@@ -33,13 +41,25 @@ export default function Status() {
     document.title = "Server Manager";
   }, []); // The empty array ensures this runs only on mount
 
+  const toggleStatus = (appName) => {
+    console.log(`- in toggleStatus: ${appName}`);
+  };
+
   const appListRows = [];
   appsList.map((elem, index) => {
     const stuff = (
       <tr>
-        <td>{elem.name}</td>
+        <td>
+          <div>
+            <span className={styles.spanAppName}>{elem.name}</span> <br></br>
+            {elem.appProjectPath}
+          </div>
+        </td>
         <td>{elem?.port}</td>
-        <td>{elem.status}</td>
+
+        <td>
+          <button onClick={() => toggleStatus(elem.name)}>{elem.status}</button>
+        </td>
       </tr>
     );
 
