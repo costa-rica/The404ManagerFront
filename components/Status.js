@@ -15,6 +15,7 @@ export default function Status() {
   useEffect(() => {
     (async () => {
       console.log(`sendign this token: ${user.token}`);
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`,
         {
@@ -27,12 +28,59 @@ export default function Status() {
       );
       const responseJson = await response.json();
       console.log(responseJson);
-      await appsListSetter(responseJson.appsList);
-      await appListRowsSetter(
-        responseJson.appsList[0].name
-          ? responseJson.appsList[0].name
-          : "Did not get here in time"
-      );
+      // await appsListSetter(responseJson.appsList);
+
+      const appsListTemp = [];
+      // await appsList.map((elem, index) => {
+      //   const stuff = (
+      //     <tr key={`tr${index}`}>
+      //       {/* <StatusTableRow key={index} elem={elem} /> */}
+
+      //       <td>
+      //         <span style={styles.spanAppName}>{elem.name}</span>
+      //         <br />
+      //         <span style={styles.spanAppProjectPath}>
+      //           {elem.appProjectPath}
+      //         </span>
+      //       </td>
+      //       <td>{elem?.port}</td>
+      //       <td>
+      //         <button onClick={() => toggleStatus(elem.name)}>
+      //           {/* {appStatus} */}
+      //           {elem.status == "online" ? "active" : "inactive"}
+      //         </button>
+      //       </td>
+      //     </tr>
+      //   );
+
+      //   appsListTemp.push(stuff);
+      // });
+
+      // await appListRowsSetter(
+      //   responseJson.appsList[0].name
+      //     ? responseJson.appsList[0].name
+      //     : "Did not get here in time"
+      // );
+      // await appListRowsSetter(appsListTemp);
+
+      responseJson.appsList.map((elem, index) => {
+        appsListTemp.push(
+          <tr key={`tr${index}`}>
+            <StatusTableRow elem={elem} />
+            {/* <td>
+              <span style={styles2.spanAppName}>{elem.name}</span>
+              <br />
+              <span style={styles2.spanAppProjectPath}>
+                {elem.appProjectPath}
+              </span>
+            </td>
+            <td>{elem.port}</td>
+            <td>{elem.name}</td> */}
+          </tr>
+        );
+      });
+      console.log("--- > finished fauxReponse.appsList.map");
+      appListRowsSetter(appsListTemp);
     })(); // end of async ()
   }, []);
 
@@ -52,61 +100,52 @@ export default function Status() {
               <th>Status</th>
             </tr>
           </thead>
-          {/* <tbody>{appListRows}</tbody> */}
-          <tbody>
-            {" "}
-            <tr>
-              <td>1</td>
-              <td>1</td>
-              <td>1</td>
-            </tr>
-          </tbody>
+          <tbody>{appListRows}</tbody>
         </table>
-        {appListRows}
       </div>
     </main>
   );
 }
 
-// const fauxReponse = {
-//   result: true,
-//   appsList: [
-//     {
-//       id: 0,
-//       name: "The404ManagerBack",
-//       status: "online",
-//       port: 8000,
-//       appProjectPath: "/home/dashanddata_user/applications/The404ManagerBack",
-//     },
-//     {
-//       id: 1,
-//       name: "DevelopmentWebApp",
-//       status: "online",
-//       appProjectPath: "/home/dashanddata_user/applications/DevelopmentWebApp",
-//     },
-//     {
-//       id: 2,
-//       name: "DevelopmentWebApp02",
-//       status: "stopped",
-//       port: 8002,
-//       appProjectPath: "/home/dashanddata_user/applications/DevelopmentWebApp02",
-//     },
-//     {
-//       id: 3,
-//       name: "StockPriceModel02",
-//       status: "stopped",
-//       port: 8003,
-//       appProjectPath: "/home/dashanddata_user/applications/StockPriceModel02",
-//     },
-//   ],
-// };
+const fauxReponse = {
+  result: true,
+  appsList: [
+    {
+      id: 0,
+      name: "The404ManagerBack",
+      status: "online",
+      port: 8000,
+      appProjectPath: "/home/dashanddata_user/applications/The404ManagerBack",
+    },
+    {
+      id: 1,
+      name: "DevelopmentWebApp",
+      status: "online",
+      appProjectPath: "/home/dashanddata_user/applications/DevelopmentWebApp",
+    },
+    {
+      id: 2,
+      name: "DevelopmentWebApp02",
+      status: "stopped",
+      port: 8002,
+      appProjectPath: "/home/dashanddata_user/applications/DevelopmentWebApp02",
+    },
+    {
+      id: 3,
+      name: "StockPriceModel02",
+      status: "stopped",
+      port: 8003,
+      appProjectPath: "/home/dashanddata_user/applications/StockPriceModel02",
+    },
+  ],
+};
 
-// const styles2 = {
-//   spanAppName: {
-//     fontSize: "xx-large",
-//     color: "#fa9f15",
-//   },
-//   spanAppProjectPath: {
-//     color: "#888787",
-//   },
-// };
+const styles2 = {
+  spanAppName: {
+    fontSize: "xx-large",
+    color: "#fa9f15",
+  },
+  spanAppProjectPath: {
+    color: "#888787",
+  },
+};
