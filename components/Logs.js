@@ -8,12 +8,12 @@ import { useRouter } from "next/router";
 import HeaderCustom from "./Header";
 
 export default function Logs() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [machineName, setMachineName] = useState("");
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const user = useSelector((state) => state.user.value);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [machineName, setMachineName] = useState("");
+  // const dispatch = useDispatch();
+  // const router = useRouter();
+  // const user = useSelector((state) => state.user.value);
 
   useEffect(() => {
     console.log(
@@ -26,7 +26,7 @@ export default function Logs() {
   const stuff = (
     <div className={styles.divTitles}>
       <h1 className={styles.title}>The 404 Server Manager</h1>
-      <h2>{user.machineName}</h2>
+      {/* <h2>{user.machineName}</h2> */}
     </div>
   );
 

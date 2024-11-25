@@ -37,5 +37,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setMachineNameRedux, loginUser, logoutUser } = userSlice.actions;
+export const { setMachineNameRedux, loginUser } = userSlice.actions;
 export default userSlice.reducer;
