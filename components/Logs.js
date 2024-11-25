@@ -1,11 +1,17 @@
-import styles from "../styles/Status.module.css";
+// import styles from "../styles/Status.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderCustom from "./Header";
 
 export default function Logs() {
-  const [logs, logsSetter] = useState([]);
+  // const [logs, logsSetter] = useState([]);
   const user = useSelector((state) => state.user.value);
+  const [logs, logsSetter] = useState({
+    pm2CombinedOutput: "",
+    pm2CombinedError: "",
+    syslog: "",
+  });
+  const [activeTab, setActiveTab] = useState("pm2CombinedOutput");
 
   useEffect(() => {
     (async () => {
@@ -30,7 +36,7 @@ export default function Logs() {
       );
       const dataPm2CombinedError = (
         <div>
-          <h1>dataPm2CombinedError</h1>
+          <h1>pm2CombinedError</h1>
           <div>{responseJson.responseBody.dataPm2CombinedError}</div>
         </div>
       );
@@ -51,30 +57,80 @@ export default function Logs() {
       // const logsTemp = responseJson.responseBody.map((elem, index) => {
       //   return <div>elem</div>;
       // });
-      logsSetter(combinedLogs);
+      // logsSetter(combinedLogs);
+      logsSetter(responseJson.responseBody);
     })(); // end of async ()
   }, []);
-
-  // const stuff = (
-  //   <div className={styles.divTitles}>
-  //     <h1 className={styles.title}>The 404 Server Manager</h1>
-  //     {/* <h2>{user.machineName}</h2> */}
-  //   </div>
-  // );
-
-  // const stuffArray = [];
-  // for (let i = 0; i < 20; i++) {
-  //   stuffArray.push(stuff);
-  // }
 
   return (
     <main className={styles.mainStatus}>
       <HeaderCustom />
-      <div className="restOfPage">
-        <h1 style={{ backgroundColor: "red" }}>Logs Starts here</h1>
-        <div className={styles.divMainSub}>Status page: </div>
-        {logs}
+      <div style={{ position: "relative" }}>
+        {/* Tabs */}
+        <div style={styles.tabsContainer}>
+          {["pm2CombinedOutput", "pm2CombinedError", "syslog"].map((tab) => (
+            <button
+              key={tab}
+              style={{
+                ...styles.tab,
+                ...(activeTab === tab ? styles.activeTab : {}),
+              }}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div style={styles.contentContainer}>
+          <pre style={styles.logContent}>{logs[activeTab]}</pre>
+        </div>
       </div>
     </main>
   );
 }
+
+const styles = {
+  tabsContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+    backgroundColor: "#f4f4f4",
+    padding: "10px",
+    borderBottom: "1px solid #ccc",
+    position: "fixed", // Makes the tabs stay at the top
+    top: "10rem",
+    left: 0,
+    right: 0,
+    zIndex: 1000, // Ensures the tabs appear above other content
+  },
+  tab: {
+    flex: 1,
+    padding: "10px",
+    cursor: "pointer",
+    textAlign: "center",
+    backgroundColor: "#e0e0e0",
+    border: "none",
+    borderRadius: "4px",
+    margin: "0 5px",
+    fontWeight: "bold",
+  },
+  activeTab: {
+    backgroundColor: "#0070f3",
+    color: "white",
+  },
+  contentContainer: {
+    padding: "20px",
+    backgroundColor: "black",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    marginTop: "13rem",
+  },
+  logContent: {
+    whiteSpace: "pre-wrap",
+    wordWrap: "break-word",
+    fontFamily: "monospace",
+    fontSize: "14px",
+    color: "white",
+  },
+};
