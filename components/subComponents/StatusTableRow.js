@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 export default function StatusTableRow(props) {
   const user = useSelector((state) => state.user.value);
   const [appStatus, appStatusSetter] = useState(
+    // props.elem.appName.includes("The404") ? props.elem.status == "online" ? "active" : "inactive"
     props.elem.status == "online" ? "active" : "inactive"
   );
   const toggleStatus = async (appName) => {
     console.log(`- in toggleStatus: ${appName}`);
-    if (appName == "The404ManagerBack") return;
+    console.log(
+      'props.elem.name.includes("The404"): ',
+      props.elem.name.includes("The404")
+    );
+    // if (appName == "The404ManagerBack") return;
     const bodyObj = {
       appName: props.elem.name,
     };
@@ -27,11 +32,17 @@ export default function StatusTableRow(props) {
     if (response.status == 200) {
       const responseJson = await response.json();
       console.log(responseJson);
-      appStatusSetter(responseJson.status == "started" ? "active" : "inactive");
-    } else {
-      window.alert(
-        responseJson?.message ? resJson.message : "There was a server error"
+      appStatusSetter(
+        props.elem.name.includes("The404")
+          ? responseJson.status == "restarted"
+            ? "restarted"
+            : "inactive"
+          : responseJson.status == "started"
+          ? "active"
+          : "inactive"
       );
+    } else {
+      window.alert(`There was a server error: ${response.status}`);
     }
   };
 
@@ -46,7 +57,14 @@ export default function StatusTableRow(props) {
       </td>
       <td>{props.elem?.port}</td>
       <td>
-        <button onClick={() => toggleStatus(props.elem.name)}>
+        <button
+          style={{
+            backgroundColor: appStatus == "inactive" ? null : "#4ad22b",
+            borderRadius: "12px",
+            padding: "0.25rem",
+          }}
+          onClick={() => toggleStatus(props.elem.name)}
+        >
           {appStatus}
         </button>
       </td>

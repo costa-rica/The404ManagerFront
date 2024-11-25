@@ -20,8 +20,8 @@ export default function Status() {
           },
         }
       );
-      const resJson = await response.json();
       if (response.status == 200) {
+        const resJson = await response.json();
         const appsListTemp = resJson.appsList.map((elem, index) => {
           return (
             <tr key={`tr${index}`}>
@@ -31,9 +31,7 @@ export default function Status() {
         });
         appListRowsSetter(appsListTemp);
       } else {
-        window.alert(
-          resJson?.message ? resJson.message : "There was a server error"
-        );
+        window.alert(`There was a server error: ${response.status}`);
       }
     })(); // end of async ()
   }, []);

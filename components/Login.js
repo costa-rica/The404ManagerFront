@@ -34,17 +34,15 @@ export default function Login() {
       }
     );
     console.log("received response");
-    const resJson = await response.json();
     if (response.status == 200) {
+      const resJson = await response.json();
       console.log(resJson);
       dispatch(loginUser(resJson));
       console.log(resJson);
       dispatch(loginUser(resJson));
       router.push("/status");
     } else {
-      window.alert(
-        resJson?.message ? resJson.message : "There was a server error"
-      );
+      window.alert(`There was a server error: ${response.status}`);
     }
     console.log("🚨 after the fetch ");
   };
