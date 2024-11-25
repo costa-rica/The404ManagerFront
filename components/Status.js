@@ -20,15 +20,21 @@ export default function Status() {
           },
         }
       );
-      const responseJson = await response.json();
-      const appsListTemp = responseJson.appsList.map((elem, index) => {
-        return (
-          <tr key={`tr${index}`}>
-            <StatusTableRow elem={elem} />
-          </tr>
+      const resJson = await response.json();
+      if (response.status == 200) {
+        const appsListTemp = resJson.appsList.map((elem, index) => {
+          return (
+            <tr key={`tr${index}`}>
+              <StatusTableRow elem={elem} />
+            </tr>
+          );
+        });
+        appListRowsSetter(appsListTemp);
+      } else {
+        window.alert(
+          resJson?.message ? resJson.message : "There was a server error"
         );
-      });
-      appListRowsSetter(appsListTemp);
+      }
     })(); // end of async ()
   }, []);
 
