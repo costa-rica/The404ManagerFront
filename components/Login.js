@@ -16,8 +16,6 @@ export default function Login() {
     console.log(
       `process.env.NEXT_PUBLIC_API_BASE_URL: ${process.env.NEXT_PUBLIC_API_BASE_URL}`
     );
-
-    document.title = "Server Manager";
   }, []);
 
   const sendPasswordBackToParent = (passwordFromInputPasswordElement) => {
@@ -35,11 +33,11 @@ export default function Login() {
         body: JSON.stringify(bodyObj),
       }
     );
-    const resJson = await response.json();
     console.log("received response");
-    console.log(resJson);
-    dispatch(loginUser(resJson));
     if (response.status == 200) {
+      const resJson = await response.json();
+      console.log(resJson);
+      dispatch(loginUser(resJson));
       console.log(resJson);
       dispatch(loginUser(resJson));
       router.push("/status");

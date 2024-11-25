@@ -1,10 +1,8 @@
 .mainStatus {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
+  align-items: center;
   min-height: 100vh;
-  /* padding: 4rem 0; */
   background-color: var(--background-color);
 
   margin: 0;
@@ -13,10 +11,8 @@
 .divStatus {
   margin-top: var(--header-height);
 }
-.spanAppName {
-  font-size: xx-large;
-  color: var(--highlight-yellow);
-}
-.spanAppProjectPath {
-  color: var(--med-text-color);
+
+.tableStyle {
+  width: 100%;
+  /* background-color: gray; */
 }

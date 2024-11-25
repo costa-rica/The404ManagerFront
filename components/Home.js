@@ -32,8 +32,6 @@ export default function Home() {
         dispatch(setMachineNameRedux("failed to get API response"));
       }
     })();
-
-    document.title = "Server Manager";
   }, []); // The empty array ensures this runs only on mount
 
   const handleClickToLogin = () => router.push("/login");

@@ -29,9 +29,9 @@ export default function Register() {
         body: JSON.stringify(bodyObj),
       }
     );
-    const resJson = await response.json();
     console.log("received response: ", response.status);
     if (response.status == 200) {
+      const resJson = await response.json();
       console.log("Got a sucessful 200 response ✅️");
       console.log(resJson);
       dispatch(loginUser(resJson));

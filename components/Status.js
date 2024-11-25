@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../reducers/user";
 import { useRouter } from "next/router";
 import HeaderCustom from "./Header";
+import StatusTableRow from "./subComponents/StatusTableRow";
 
 export default function Status() {
   const [appsList, appsListSetter] = useState([]);
@@ -34,23 +35,15 @@ export default function Status() {
         dispatch(setMachineNameRedux("failed to get API response"));
       }
     })();
-
-    document.title = "Server Manager";
-  }, []); // The empty array ensures this runs only on mount
-
+  }, []);
+  const toggleStatus = (appName) => {
+    console.log(`- in toggleStatus: ${appName}`);
+  };
   const appListRows = [];
   appsList.map((elem, index) => {
     const stuff = (
       <tr>
-        <td>
-          <span className={styles.spanAppName}>{elem.name}</span>
-          <br />
-          <span className={styles.spanAppProjectPath}>
-            {elem.appProjectPath}
-          </span>
-        </td>
-        <td>{elem?.port}</td>
-        <td>{elem.status}</td>
+        <StatusTableRow elem={elem} />
       </tr>
     );
 
@@ -61,14 +54,12 @@ export default function Status() {
     <main className={styles.mainStatus}>
       <HeaderCustom />
       <div className="restOfPage">
-        <h1 style={{ backgroundColor: "red" }}>Status Starts here</h1>
-        <table>
+        <table className={styles.tableStyle}>
           <tr>
             <th>App name</th>
             <th>Port</th>
             <th>Status</th>
           </tr>
-
           {appListRows}
         </table>
       </div>

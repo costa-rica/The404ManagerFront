@@ -31,7 +31,8 @@ function App({ Component, pageProps }) {
     <div className={`${jetBrainsMono.variable} ${righteous.variable}`}>
       <Provider store={store}>
         <Head>
-          <title>Next.js App</title>
+          <title>The 404</title>
+          <meta name="The 404" content="The 404 Manager by dash and data." />
         </Head>
         <Component {...pageProps} />
       </Provider>
