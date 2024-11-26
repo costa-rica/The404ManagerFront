@@ -6,6 +6,20 @@
 - All other pages/ components will have a <div> that might function like a <main>
 - This does not have media query to account for screen size.
 
+### TemplateView
+
+This component houses the Navigation bar and the rest of the page.
+
+- to use in other components:
+
+```js
+return (
+  <TemplateView>
+    <div className={styles.main}>[page contents]</div>
+  </TemplateView>
+);
+```
+
 ### Hamburger menu
 
 - Install npm

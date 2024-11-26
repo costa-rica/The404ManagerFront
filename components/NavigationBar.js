@@ -10,7 +10,6 @@ export default function NavigationBar() {
   const menuRef = useRef(null); // Create a ref for the menu container
   const router = useRouter();
   const currentPath = router.pathname;
-  const user = useSelector((state) => state.user.value);
   const toggleMenu = () => {
     // setMenuOpen((prev) => !prev);<--- toggles
     setMenuOpen(true);
@@ -34,7 +33,7 @@ export default function NavigationBar() {
       <div className={styles.divHeaderTop}>
         <div className={styles.divHeaderTopLeft}>
           <h1 className={styles.h1AppName}>The 404 Server Manager</h1>
-          <h2 className={styles.h2MachineName}>{user.machineName}</h2>
+          <h2 className={styles.h2MachineName}>Some Machine Name</h2>
         </div>
         <div className={styles.divHeaderRight}>
           <button
