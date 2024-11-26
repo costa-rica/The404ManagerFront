@@ -1,18 +1,34 @@
 import styles from "../styles/NavigationBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 export default function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Create a ref for the menu container
   const router = useRouter();
   const currentPath = router.pathname;
   const user = useSelector((state) => state.user.value);
   const toggleMenu = () => {
-    setMenuOpen((prev) => !prev);
+    // setMenuOpen((prev) => !prev);<--- toggles
+    setMenuOpen(true);
   };
+  // Handle clicks outside the menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false); // Close the menu if clicked outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav className="nav-custom">
       <div className={styles.divHeaderTop}>
@@ -35,8 +51,9 @@ export default function NavigationBar() {
             className={`${styles.divHeaderRightUl} ${
               menuOpen ? styles.menuOpen : ""
             }`}
+            ref={menuRef}
           >
-            <li>
+            <li className={styles.divHeaderRightLi}>
               <a
                 className={
                   currentPath === "/status"
@@ -48,7 +65,7 @@ export default function NavigationBar() {
                 Status
               </a>
             </li>
-            <li>
+            <li className={styles.divHeaderRightLi}>
               <a
                 className={
                   currentPath === "/logs" ? styles.btnNavActive : styles.btnNav
@@ -58,7 +75,7 @@ export default function NavigationBar() {
                 Logs
               </a>
             </li>
-            <li>
+            <li className={styles.divHeaderRightLi}>
               <a
                 className={
                   currentPath === "/create"

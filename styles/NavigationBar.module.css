@@ -11,7 +11,6 @@
 /* Base styles (default for small screens) */
 .divHeaderTop {
   display: flex;
-  /* flex-direction: column; */
   align-items: center;
   text-align: center;
   justify-content: space-between;
@@ -20,9 +19,13 @@
 
 .divHeaderTopLeft {
   margin-bottom: 1rem;
-  /* background-color: aqua; */
+  color: var(--med-text-color);
 }
 
+.h2MachineName {
+  font-size: medium;
+  color: var(--light-text-color);
+}
 .divHeaderRight {
   position: relative;
   /* background-color: aquamarine; */
@@ -39,16 +42,21 @@
 .divHeaderRightUl {
   display: none; /* Hide menu by default */
   flex-direction: column;
-  background-color: white;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--med-text-color);
   position: absolute;
   top: 100%;
   right: 0;
-  width: 200px;
-  border: 1px solid #ccc;
+  border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   list-style: none;
   margin: 0;
+  z-index: 1000;
+}
+.divHeaderRightLi {
+  padding: 0.5rem;
 }
 
 .menuOpen {
@@ -57,24 +65,51 @@
 
 /* Large screens (media query) */
 @media (min-width: 768px) {
-  .divHeaderTop {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .divHeaderRightUl {
-    display: flex; /* Always visible on large screens */
-    flex-direction: row;
-    position: static; /* Reset positioning */
-    background: none; /* Remove background and shadow */
-    box-shadow: none; /* Remove shadow */
-    border: none; /* Remove border */
-    padding: 0;
-  }
-
   .hamburgerMenu {
     display: none; /* Hide hamburger menu on large screens */
+  }
+  .divHeaderTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: baseline;
+    padding: 1rem;
+  }
+  .divHeaderTopLeft {
+    text-align: center;
+  }
+  .divHeaderRight {
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+    padding: 0;
+    margin: 0;
+    transform: translate(-2rem, -2.9rem);
+  }
+  .divHeaderRightUl {
+    display: flex; /* Align items in a row */
+    flex-direction: row; /* Ensure row direction */
+    justify-content: space-around; /* Add space between items */
+    align-items: center; /* Vertically align items if needed */
+    list-style-type: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .divHeaderRightUl li {
+    display: inline; /* Ensure each list item is inline */
+  }
+  .btnNav {
+    text-decoration: none;
+    background-color: var(--light-text-color);
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 12px 12px 0 0;
+  }
+  .btnNavActive {
+    text-decoration: none;
+    background-color: var(--highlight-yellow);
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 12px 12px 0 0;
   }
 }
 

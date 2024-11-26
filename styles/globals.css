@@ -1,11 +1,11 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 * {
   box-sizing: border-box;
+  font-family: var(--font-jetbrains-mono), monospace;
 }
 
 :root {
