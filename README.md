@@ -1,4 +1,4 @@
-# NavBAr at the top
+# NavBar at the top
 
 ## Description
 
