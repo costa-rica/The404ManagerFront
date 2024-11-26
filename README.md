@@ -1,41 +1,67 @@
-# NavBar at the top
+# The 404 Server Manager
 
-## Description
+## .env
 
-- The key his is that we are using a <TemplateView> that will hold the header/navbar at the top of the screen and everything else in a <main>.
-- All other pages/ components will have a <div> that might function like a <main>
-- This does not have media query to account for screen size.
+```
+NEXT_PUBLIC_API_BASE_URL=http://0.0.0.0:3000
+```
 
-### TemplateView
-
-This component houses the Navigation bar and the rest of the page.
-
-- to use in other components:
+## getting Input without missing the last character
 
 ```js
-return (
-  <TemplateView>
-    <div className={styles.main}>[page contents]</div>
-  </TemplateView>
-);
+  const getPassword = (enteredText) => {
+    setPassword(enteredText.target.value);
+    props.sendPasswordBackToParent(enteredText.target.value);
+  };
+
+    return (
+    <div>
+      <input
+        onChange={getPassword}
+      />
+      <div>
+    )
 ```
 
-### Hamburger menu
+## Font
 
-- Install npm
-  `npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/fontawesome-svg-core`
+Requires NextJs 13 or heigher
 
-- Install yarn
-
-```
-yarn add @fortawesome/fontawesome-svg-core
-yarn add @fortawesome/react-fontawesome
-yarn add @fortawesome/free-solid-svg-icons
-```
-
--import
+1. next newsest `yarn add next@latest react@latest react-dom@latest`
+2. `npx @next/codemod@latest built-in-next-font .` --- this YES!
+3. install `npm i @next/font` --- maybe no?
+4. pages/app.js
 
 ```js
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { JetBrains_Mono, Righteous } from "next/font/google";
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
+const righteous = Righteous({
+  subsets: ["latin"],
+  variable: "--font-righteous",
+  weight: ["400"],
+  display: "swap",
+});
+
+function App({ Component, pageProps }) {
+  return (
+    <div className={`${jetBrainsMono.variable} ${righteous.variable}`}>
+      <Provider store={store}>// Rest of code</Provider>
+    </div>
+  );
+}
+```
+
+5. to use in css, for example, globals.css:
+
+```css
+* {
+  box-sizing: border-box;
+  font-family: var(--font-jetbrains-mono), monospace;
+}
 ```
