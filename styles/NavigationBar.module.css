@@ -7,7 +7,16 @@
   background-color: white;
   border-radius: 2rem;
 }
-
+.h1AppName {
+  margin: 0;
+  font-size: xx-large;
+  color: var(--med-text-color);
+}
+.h2MachineName {
+  margin: 5px 0 0 0;
+  font-size: xx-large;
+  color: var(--med-text-color);
+}
 /* Base styles (default for small screens) */
 .divHeaderTop {
   display: flex;

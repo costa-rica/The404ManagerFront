@@ -1,0 +1,16 @@
+.spanAppName {
+  color: var(--highlight-yellow);
+}
+.spanAppProjectPath {
+  color: var(--med-text-color);
+  display: none;
+}
+/* Large screens (media query) */
+@media (min-width: 450px) {
+  .spanAppName {
+    font-size: xx-large;
+  }
+  .spanAppProjectPath {
+    display: inline;
+  }
+}

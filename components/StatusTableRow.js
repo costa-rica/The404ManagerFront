@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "../styles/StatusTableRow.module.css";
 
 export default function StatusTableRow(props) {
   const user = useSelector((state) => state.user.value);
@@ -49,9 +50,9 @@ export default function StatusTableRow(props) {
   return (
     <>
       <td>
-        <span style={styles.spanAppName}>{props.elem.name}</span>
+        <span className={styles.spanAppName}>{props.elem.name}</span>
         <br />
-        <span style={styles.spanAppProjectPath}>
+        <span className={styles.spanAppProjectPath}>
           {props.elem.appProjectPath}
         </span>
       </td>
@@ -72,12 +73,12 @@ export default function StatusTableRow(props) {
   );
 }
 
-const styles = {
-  spanAppName: {
-    fontSize: "xx-large",
-    color: "#fa9f15",
-  },
-  spanAppProjectPath: {
-    color: "#888787",
-  },
-};
+// const styles = {
+//   spanAppName: {
+//     fontSize: "xx-large",
+//     color: "#fa9f15",
+//   },
+//   spanAppProjectPath: {
+//     color: "#888787",
+//   },
+// };
