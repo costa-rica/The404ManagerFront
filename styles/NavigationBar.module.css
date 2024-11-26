@@ -1,0 +1,109 @@
+.divLine {
+  position: fixed;
+  top: var(--header-height);
+  height: 3px;
+  width: 90vw;
+  transform: translateX(5vw);
+  background-color: white;
+  border-radius: 2rem;
+}
+
+/* Base styles (default for small screens) */
+.divHeaderTop {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.divHeaderTopLeft {
+  margin-bottom: 1rem;
+  /* background-color: aqua; */
+}
+
+.divHeaderRight {
+  position: relative;
+  /* background-color: aquamarine; */
+}
+
+.hamburgerMenu {
+  display: block; /* Visible on small screens */
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.divHeaderRightUl {
+  display: none; /* Hide menu by default */
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  list-style: none;
+  margin: 0;
+}
+
+.menuOpen {
+  display: flex; /* Show menu when toggled */
+}
+
+/* Large screens (media query) */
+@media (min-width: 768px) {
+  .divHeaderTop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .divHeaderRightUl {
+    display: flex; /* Always visible on large screens */
+    flex-direction: row;
+    position: static; /* Reset positioning */
+    background: none; /* Remove background and shadow */
+    box-shadow: none; /* Remove shadow */
+    border: none; /* Remove border */
+    padding: 0;
+  }
+
+  .hamburgerMenu {
+    display: none; /* Hide hamburger menu on large screens */
+  }
+}
+
+/* Old */
+/* .divHeaderTopLeft {
+  text-align: center;
+}
+.divHeaderRight {
+  position: absolute;
+  top: var(--header-height);
+  right: 0;
+  transform: translate(-5vw, -100%);
+
+}
+.divHeaderRightUl {
+  display: flex;
+  list-style-type: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.btnNav {
+  text-decoration: none;
+  background-color: var(--light-text-color);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 12px 12px 0 0;
+}
+.btnNavActive {
+  text-decoration: none;
+  background-color: var(--highlight-yellow);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 12px 12px 0 0;
+} */
