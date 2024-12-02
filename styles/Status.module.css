@@ -8,15 +8,28 @@
   margin: 0;
   padding: 0;
 }
-.divStatus {
+/* .divStatus {
   margin-top: var(--header-height);
+} */
+.divTable {
+  width: 95%;
 }
-
 .tableStyle {
   width: 100%;
   /* background-color: gray; */
 }
+.thPort {
+  display: none;
+  background-color: green;
+}
 
 /* Large screens (media query) */
-@media (min-width: 400px) {
+@media (min-width: 768px) {
+  .divTable {
+    width: 85%;
+  }
+  .thPort {
+    display: table-cell;
+    background-color: purple;
+  }
 }

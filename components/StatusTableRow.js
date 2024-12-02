@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/StatusTableRow.module.css";
 
@@ -47,23 +47,56 @@ export default function StatusTableRow(props) {
     }
   };
 
+  useEffect(() => {
+    // Use the dynamically generated class name
+    const toggleCells = document.querySelectorAll(`.${styles.toggleCell}`);
+
+    toggleCells.forEach((cell) => {
+      cell.addEventListener("click", () => {
+        cell.classList.toggle(styles.show); // Use the dynamically generated "show" class
+        console.log("toggle in useEffect body");
+      });
+    });
+
+    // Cleanup listeners on component unmount
+    return () => {
+      toggleCells.forEach((cell) => {
+        cell.removeEventListener("click", () => {
+          cell.classList.toggle(styles.show);
+          console.log("toggle in useEffect return");
+        });
+      });
+    };
+  }, []);
+
   return (
     <>
-      <td>
+      <td className={styles.toggleCell}>
         <span className={styles.spanAppName}>{props.elem.name}</span>
         <br />
-        <span className={styles.spanAppProjectPath}>
-          {props.elem.appProjectPath}
-        </span>
+
+        <div className={styles.additionalContent}>
+          {" "}
+          <span className={styles.spanAppProjectPath}>
+            {props.elem.appProjectPath}
+          </span>
+          <div className={styles.divAddContentTitle}>App urls:</div>
+          <div className={styles.divAddContent}>{props.elem.urls}</div>
+          <div className={styles.divAddContentTitle}>Local IP & port:</div>
+          <div className={styles.divAddContent}>
+            {props.elem.localIp}: {props.elem.port}
+          </div>
+        </div>
       </td>
-      <td>{props.elem?.port}</td>
-      <td>
+      <td className={styles.tdPort}>{props.elem?.port}</td>
+      <td className={styles.tdBtnStatus}>
         <button
           style={{
             backgroundColor: appStatus == "inactive" ? null : "#4ad22b",
-            borderRadius: "12px",
-            padding: "0.25rem",
+            // borderRadius: "12px",
+            // padding: "0.25rem",
           }}
+          className={styles.btnStatus}
           onClick={() => toggleStatus(props.elem.name)}
         >
           {appStatus}
@@ -72,13 +105,3 @@ export default function StatusTableRow(props) {
     </>
   );
 }
-
-// const styles = {
-//   spanAppName: {
-//     fontSize: "xx-large",
-//     color: "#fa9f15",
-//   },
-//   spanAppProjectPath: {
-//     color: "#888787",
-//   },
-// };

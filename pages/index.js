@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setMachineNameRedux } from "../reducers/user";
 import { useRouter } from "next/router";
-import TemplateView from "../components/TemplateView";
 
 function Index() {
   const user = useSelector((state) => state.user.value);

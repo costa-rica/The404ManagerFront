@@ -3,14 +3,51 @@
 }
 .spanAppProjectPath {
   color: var(--med-text-color);
+  /* display: none; */
+}
+.tdPort {
+  display: none;
+  background-color: green;
+}
+
+.toggleCell {
+  cursor: pointer;
+}
+
+.additionalContent {
   display: none;
 }
+/* Show additional content when toggled */
+.show .additionalContent {
+  display: block;
+  background-color: purple;
+}
+.divAddContentTitle {
+  color: var(--med-text-color);
+}
+.divAddContent {
+  color: white;
+  padding-left: 0.25rem;
+}
+
+.tdBtnStatus {
+  display: flex;
+  justify-content: center;
+}
+.btnStatus {
+  border-radius: 12px;
+  padding: 0.25rem;
+}
+
 /* Large screens (media query) */
-@media (min-width: 450px) {
+@media (min-width: 768px) {
   .spanAppName {
     font-size: xx-large;
   }
   .spanAppProjectPath {
     display: inline;
+  }
+  .tdPort {
+    display: table-cell;
   }
 }

@@ -22,7 +22,8 @@ export default function Status() {
       );
       if (response.status == 200) {
         const resJson = await response.json();
-        const appsListTemp = resJson.appsList.map((elem, index) => {
+        // const appsListTemp = resJson.appsList.map((elem, index) => {
+        const appsListTemp = resJson.appsListFromDb.map((elem, index) => {
           return (
             <tr key={`tr${index}`}>
               <StatusTableRow elem={elem} />
@@ -30,6 +31,9 @@ export default function Status() {
           );
         });
         appListRowsSetter(appsListTemp);
+        console.log("-- resJson.appsList --");
+        // console.log(resJson.appsList);
+        console.log(resJson.appsListFromDb);
       } else {
         window.alert(`There was a server error: ${response.status}`);
       }
@@ -41,16 +45,18 @@ export default function Status() {
     //   <HeaderCustom />
     <TemplateView>
       <div className={styles.mainStatus}>
-        <table className={styles.tableStyle}>
-          <thead>
-            <tr>
-              <th>App name</th>
-              <th>Port</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>{appListRows}</tbody>
-        </table>
+        <div className={styles.divTable}>
+          <table className={styles.tableStyle}>
+            <thead>
+              <tr>
+                <th>App name</th>
+                <th className={styles.thPort}>Port</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>{appListRows}</tbody>
+          </table>
+        </div>
       </div>
     </TemplateView>
     // </main>
