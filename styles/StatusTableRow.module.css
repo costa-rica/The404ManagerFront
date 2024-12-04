@@ -1,4 +1,5 @@
 .spanAppName {
+  font-size: large;
   color: var(--highlight-yellow);
 }
 .spanAppProjectPath {
@@ -14,14 +15,22 @@
   cursor: pointer;
 }
 
-.additionalContent {
+/* .additionalContent {
   display: none;
-}
+} */
 /* Show additional content when toggled */
-.show .additionalContent {
+.additionalContent {
   display: block;
   background-color: purple;
 }
+.additionalContent.visible {
+  display: block;
+}
+
+.additionalContent.hidden {
+  display: none;
+}
+
 .divAddContentTitle {
   color: var(--med-text-color);
 }
@@ -41,6 +50,9 @@
 
 /* Large screens (media query) */
 @media (min-width: 768px) {
+  .additionalContent {
+    display: block !important; /* Override visibility state */
+  }
   .spanAppName {
     font-size: xx-large;
   }

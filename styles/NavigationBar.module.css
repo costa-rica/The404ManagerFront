@@ -9,7 +9,6 @@
 }
 .h1AppName {
   margin: 0;
-  font-size: xx-large;
   color: var(--med-text-color);
 }
 .h2MachineName {
@@ -77,6 +76,9 @@
 @media (min-width: 768px) {
   .hamburgerMenu {
     display: none; /* Hide hamburger menu on large screens */
+  }
+  .h1AppName {
+    font-size: xx-large;
   }
   .divHeaderTop {
     display: flex;

@@ -8,6 +8,11 @@ export default function StatusTableRow(props) {
     // props.elem.appName.includes("The404") ? props.elem.status == "online" ? "active" : "inactive"
     props.elem.status == "online" ? "active" : "inactive"
   );
+  const [additionalRowsVisible, additionalRowsVisibleSetter] = useState(false);
+  const toggleAdditionalRowsVisible = () => {
+    console.log("--> toggling");
+    additionalRowsVisibleSetter((prev) => !prev);
+  };
   const toggleStatus = async (appName) => {
     console.log(`- in toggleStatus: ${appName}`);
     console.log(
@@ -16,7 +21,7 @@ export default function StatusTableRow(props) {
     );
     // if (appName == "The404ManagerBack") return;
     const bodyObj = {
-      appName: props.elem.name,
+      appName: props.elem.appName,
     };
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/toggle-app`,
@@ -47,47 +52,41 @@ export default function StatusTableRow(props) {
     }
   };
 
-  useEffect(() => {
-    // Use the dynamically generated class name
-    const toggleCells = document.querySelectorAll(`.${styles.toggleCell}`);
+  let listOfInnerElements = [];
 
-    toggleCells.forEach((cell) => {
-      cell.addEventListener("click", () => {
-        cell.classList.toggle(styles.show); // Use the dynamically generated "show" class
-        console.log("toggle in useEffect body");
-      });
-    });
-
-    // Cleanup listeners on component unmount
-    return () => {
-      toggleCells.forEach((cell) => {
-        cell.removeEventListener("click", () => {
-          cell.classList.toggle(styles.show);
-          console.log("toggle in useEffect return");
-        });
-      });
-    };
-  }, []);
+  let counter = 0;
+  for (let item of props.elem.innerListObjects) {
+    listOfInnerElements.push(
+      <div key={counter}>
+        <div className={styles.divAddContentTitle}>filename:</div>
+        <div className={styles.divAddContent}>{item.filename}</div>
+      </div>
+    );
+    counter++;
+  }
 
   return (
     <>
-      <td className={styles.toggleCell}>
-        <span className={styles.spanAppName}>{props.elem.name}</span>
+      <td className={styles.toggleCell} onClick={toggleAdditionalRowsVisible}>
+        <span className={styles.spanAppName}>{props.elem.nameOfApp}</span>
         <br />
-
-        <div className={styles.additionalContent}>
+        <div
+          className={`${styles.additionalContent} ${
+            additionalRowsVisible ? styles.visible : styles.hidden
+          }`}
+        >
           {" "}
           <span className={styles.spanAppProjectPath}>
-            {props.elem.appProjectPath}
+            {props.elem.projectWorkingDirectory}
           </span>
-          <div className={styles.divAddContentTitle}>App urls:</div>
-          <div className={styles.divAddContent}>{props.elem.urls}</div>
           <div className={styles.divAddContentTitle}>Local IP & port:</div>
           <div className={styles.divAddContent}>
-            {props.elem.localIp}: {props.elem.port}
+            {props.elem.localIpOfMachine}: {props.elem.port}
           </div>
+          <div className={styles.innerListStuff}>{listOfInnerElements}</div>
         </div>
       </td>
+
       <td className={styles.tdPort}>{props.elem?.port}</td>
       <td className={styles.tdBtnStatus}>
         <button

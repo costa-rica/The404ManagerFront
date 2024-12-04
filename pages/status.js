@@ -11,7 +11,7 @@ export default function Status() {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list-apps`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/status/list/pm2`,
         {
           method: "GET",
           headers: {
@@ -23,7 +23,8 @@ export default function Status() {
       if (response.status == 200) {
         const resJson = await response.json();
         // const appsListTemp = resJson.appsList.map((elem, index) => {
-        const appsListTemp = resJson.appsListFromDb.map((elem, index) => {
+        const appsListTemp = resJson.appList.map((elem, index) => {
+          console.log(elem);
           return (
             <tr key={`tr${index}`}>
               <StatusTableRow elem={elem} />
@@ -33,7 +34,7 @@ export default function Status() {
         appListRowsSetter(appsListTemp);
         console.log("-- resJson.appsList --");
         // console.log(resJson.appsList);
-        console.log(resJson.appsListFromDb);
+        console.log(resJson.appList);
       } else {
         window.alert(`There was a server error: ${response.status}`);
       }
@@ -43,18 +44,18 @@ export default function Status() {
   return (
     // <main className={styles.mainStatus}>
     //   <HeaderCustom />
-    <TemplateView>
+    <TemplateView logsPage={true} title={"The works 404 ????"}>
       <div className={styles.mainStatus}>
         <div className={styles.divTable}>
           <table className={styles.tableStyle}>
-            <thead>
-              <tr>
-                <th>App name</th>
+            <thead className={styles.theadCustom}>
+              <tr className={styles.trCustom}>
+                <th className={styles.thAppName}>App name</th>
                 <th className={styles.thPort}>Port</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>{appListRows}</tbody>
+            <tbody className={styles.tbodyCustom}>{appListRows}</tbody>
           </table>
         </div>
       </div>
