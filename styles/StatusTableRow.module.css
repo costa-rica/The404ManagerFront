@@ -5,7 +5,7 @@
 /* Show additional content when toggled */
 .additionalContent {
   display: block;
-  background-color: purple;
+  /* background-color: purple; */
 }
 .additionalContent.visible {
   display: block;
@@ -21,11 +21,15 @@
 .divAddContent {
   color: white;
   padding-left: 0.25rem;
+  /* handle small screen long text */
+  word-wrap: break-word; /* Ensure long words or URLs wrap */
+  overflow-wrap: break-word; /* Ensure wrapping in modern browsers */
+  word-break: break-all; /* Break words at arbitrary points for extremely long text */
+  hyphens: auto; /* Adds hyphenation when possible */
 }
-
 .tdBtnStatus {
-  display: flex;
-  justify-content: center;
+  display: table-cell;
+  text-align: center;
 }
 .btnStatus {
   border-radius: 12px;
