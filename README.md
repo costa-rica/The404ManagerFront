@@ -2,6 +2,11 @@
 
 This is the new one
 
+## install app
+
+1. `yarn install`
+2. if on server: `yarn build`
+
 ## .env
 
 ```
