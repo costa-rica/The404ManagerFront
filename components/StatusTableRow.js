@@ -67,39 +67,13 @@ export default function StatusTableRow(props) {
 
   return (
     <>
-      <td className={styles.toggleCell} onClick={toggleAdditionalRowsVisible}>
-        <span className={styles.spanAppName}>{props.elem.nameOfApp}</span>
-        <br />
-        <div
-          className={`${styles.additionalContent} ${
-            additionalRowsVisible ? styles.visible : styles.hidden
-          }`}
-        >
-          {" "}
-          <span className={styles.spanAppProjectPath}>
-            {props.elem.projectWorkingDirectory}
-          </span>
-          <div className={styles.divAddContentTitle}>Local IP & port:</div>
-          <div className={styles.divAddContent}>
-            {props.elem.localIpOfMachine}: {props.elem.port}
-          </div>
-          <div className={styles.innerListStuff}>{listOfInnerElements}</div>
-        </div>
+      <td>
+        <div className={styles.tdDivNameOfApp}>{props.elem.nameOfApp}</div>
+        <div className={styles.additionalContent}></div>
       </td>
-
-      <td className={styles.tdPort}>{props.elem?.port}</td>
+      <td className={styles.tdPort}>{props.elem.port}</td>
       <td className={styles.tdBtnStatus}>
-        <button
-          style={{
-            backgroundColor: appStatus == "inactive" ? null : "#4ad22b",
-            // borderRadius: "12px",
-            // padding: "0.25rem",
-          }}
-          className={styles.btnStatus}
-          onClick={() => toggleStatus(props.elem.name)}
-        >
-          {appStatus}
-        </button>
+        <button className={styles.btnStatus}>{props.elem.status}</button>
       </td>
     </>
   );

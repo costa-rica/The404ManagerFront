@@ -42,24 +42,35 @@ export default function Status() {
   }, []);
 
   return (
-    // <main className={styles.mainStatus}>
-    //   <HeaderCustom />
-    <TemplateView logsPage={true} title={"The works 404 ????"}>
-      <div className={styles.mainStatus}>
-        <div className={styles.divTable}>
-          <table className={styles.tableStyle}>
-            <thead className={styles.theadCustom}>
-              <tr className={styles.trCustom}>
+    <TemplateView>
+      <div className={styles.statusPage}>
+        <div className={styles.tableSuper}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
                 <th className={styles.thAppName}>App name</th>
                 <th className={styles.thPort}>Port</th>
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody className={styles.tbodyCustom}>{appListRows}</tbody>
+            <tbody>
+              {/* <tr>
+                <td>Frist</td>
+                <td className={styles.thPort}>Row</td>
+                <td>to see</td>
+              </tr> */}
+              {appListRows}
+              {/* {Array.from({ length: 100 }, (_, index) => (
+                <tr key={index}>
+                  <td>Row {index + 1} Data 1</td>
+                  <td>Row {index + 1} Data 2</td>
+                  <td>Row {index + 1} Data 3</td>
+                </tr>
+              ))} */}
+            </tbody>
           </table>
         </div>
       </div>
     </TemplateView>
-    // </main>
   );
 }

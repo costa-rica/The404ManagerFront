@@ -1,23 +1,7 @@
-.spanAppName {
-  font-size: large;
-  color: var(--highlight-yellow);
-}
-.spanAppProjectPath {
-  color: var(--med-text-color);
-  /* display: none; */
-}
-.tdPort {
-  display: none;
-  background-color: green;
-}
-
 .toggleCell {
   cursor: pointer;
 }
 
-/* .additionalContent {
-  display: none;
-} */
 /* Show additional content when toggled */
 .additionalContent {
   display: block;
@@ -47,7 +31,13 @@
   border-radius: 12px;
   padding: 0.25rem;
 }
-
+.tdDivNameOfApp {
+  color: var(--highlight-yellow);
+  font-size: larger;
+}
+.tdPort {
+  display: none;
+}
 /* Large screens (media query) */
 @media (min-width: 768px) {
   .additionalContent {
@@ -61,5 +51,6 @@
   }
   .tdPort {
     display: table-cell;
+    text-align: center;
   }
 }
