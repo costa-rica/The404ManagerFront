@@ -13,6 +13,9 @@ function Index() {
   useEffect(() => {
     (async () => {
       try {
+        console.log("NEXT_PUBLIC_API_BASE_URL");
+        console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
+        console.log("API URL is : ");
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/machineName`
         );
